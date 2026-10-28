@@ -15,12 +15,12 @@
 
 ## Current status
 
-GitHub Pages is **not yet enabled** for the repository, so the workflow fails at the "Configure Pages" step. One-time fix (requires admin access), either:
+GitHub Pages is **enabled** (source: GitHub Actions) and the site is live, verified on 2026-10-28. For reference, the one-time setup (requires admin access) was either:
 
 - Settings > Pages > Build and deployment > Source: **GitHub Actions**, or
 - `gh api -X POST repos/Oren1984/nitzan-ashdod/pages -f build_type=workflow`
 
-Then re-run the latest workflow: `gh workflow run deploy-pages.yml`.
+followed by a manual run: `gh workflow run deploy-pages.yml`.
 
 ## Required permissions
 

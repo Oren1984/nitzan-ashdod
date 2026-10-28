@@ -31,7 +31,30 @@ The source files were renamed by the owner on 2026-10-28 to set this order. The 
 
 ### Live-site checks
 
-Not performed. GitHub Pages is not yet enabled for the repository (`GET /repos/Oren1984/nitzan-ashdod/pages` returns 404), so no deployment exists to check.
+At the time of Round 2, GitHub Pages was not enabled (`GET /repos/Oren1984/nitzan-ashdod/pages` returned 404), so no live checks were possible. See Round 3.
+
+## Round 3 – 2026-10-28 (first live deployment)
+
+### Deployment
+
+| Step | Result |
+|---|---|
+| Pages enabled by the owner: `gh api -X POST repos/Oren1984/nitzan-ashdod/pages -f build_type=workflow` | `build_type: workflow`, `html_url: https://oren1984.github.io/nitzan-ashdod/` |
+| Workflow run `40704928364` (`workflow_dispatch`, commit `8d5b702`) | `success` – Checkout, Configure Pages, Upload artifact and Deploy all succeeded |
+
+### Live-site checks
+
+| Check | Method | Result |
+|---|---|---|
+| HTTP status | `curl` | `/nitzan-ashdod/` 200 `text/html`; `/nitzan-ashdod/page2.html` 200 `text/html`; `/nitzan-ashdod/assets/css/styles.css` 200 `text/css` |
+| Deployed content | Live HTML compared byte-for-byte with `public/index.html` and `public/page2.html` at commit `8d5b702` | Identical |
+| Page titles | Live `<title>` | index: "שיעורים, אבחונים וטיפולים \| ניצן אשדוד"; page2: "קבוצת B•Friendly לטיפוח כישורים חברתיים \| ניצן אשדוד" |
+| Footer credit | Exact string on live pages | Present once on each page |
+| Layout | Headless Chromium, both live pages at 375, 768 and 1440 px, screenshots reviewed | Stylesheet applied; no horizontal overflow at any width |
+| Navigation | index → page2 → index on the live site | Worked in both directions |
+| Console / network | Browser report | 0 console errors or warnings, 0 failed requests |
+
+Local checks were not repeated in Round 3, because no site files changed after Round 2.
 
 ## Round 1 – 2026-10-28 (initial build, previous page order)
 

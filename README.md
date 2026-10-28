@@ -42,7 +42,10 @@ Then open http://localhost:8000/ . Opening `public/index.html` directly in a bro
 
 Every push to `main` deploys `public/` to GitHub Pages through GitHub Actions. Details: [`docs/deployment.md`](docs/deployment.md).
 
-**Status:** not live yet. GitHub Pages has not been enabled for the repository (Settings > Pages > Source: GitHub Actions). The expected URL is https://oren1984.github.io/nitzan-ashdod/ ; it will be marked as live here only after a deployment has been verified.
+**Status:** live, verified on 2026-10-28 (GitHub Pages, source: GitHub Actions).
+
+- Page 1: https://oren1984.github.io/nitzan-ashdod/
+- Page 2: https://oren1984.github.io/nitzan-ashdod/page2.html
 
 ---
 
