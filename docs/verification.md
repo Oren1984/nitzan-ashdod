@@ -1,41 +1,53 @@
-# תיעוד בדיקות
+# Verification Record
 
-תאריך: 2026-10-28. כל הבדיקות שלמטה הורצו בפועל.
+Every check listed below was actually run. Nothing here is assumed.
 
-## תוכן
+## Current source-to-page mapping
 
-| בדיקה | תוצאה |
-|---|---|
-| קריאה ויזואלית של שני הפלאיירים, כולל הגדלה של אזורי טקסט קטנים (כותרת, טקסט, מטרות, תחתית, לוגו, אבחונים) | בוצע; התמלול ב-`docs/content/` |
-| סקריפט שבודק שכל שורה בקובצי התמלול מופיעה בטקסט של ה-HTML | עבר בשני העמודים, אין חסרים |
-| טלפון `08-8544455` ומייל `nitzan.ashdod.israel@gmail.com` | הועתקו מהמקור; קישורי `tel:+97288544455` ו-`mailto:` |
-| שורת הקרדיט `Built and developed by Oren Salami` | מופיעה פעם אחת בכל עמוד |
-| תוכן שלא נוסף | אין טפסים, אנליטיקה, קישורי תרומה, פרטי קשר נוספים או טענות שאינן במקור |
+| Source file (current name) | Flyer | Website page | Transcription |
+|---|---|---|---|
+| `Image/nitzan-ashdod-page-01.jpg` | Nitzan services: lessons, diagnoses, treatments | `public/index.html` | `docs/content/page-01-transcription.txt` |
+| `Image/nitzan-ashdod-page-02.jpg` | B•Friendly social skills group | `public/page2.html` | `docs/content/page-02-transcription.txt` |
 
-## קבצים ומבנה
+The source files were renamed by the owner on 2026-10-28 to set this order. The site was updated to match; the source files themselves were not renamed again.
 
-| בדיקה | תוצאה |
-|---|---|
-| חיפוש `style=`, `<style>`, `<script>`, אירועים inline ונתיבים שמתחילים ב-`/` | לא נמצאו |
-| `lang="he" dir="rtl"`, UTF-8, viewport | בשני העמודים |
+## Round 2 – 2026-10-28 (page-order change and English documentation)
 
-## דפדפן (headless Chromium דרך Playwright, שרת מקומי תחת `/nitzan-ashdod/`)
+### Local checks
 
-| בדיקה | תוצאה |
-|---|---|
-| טעינת שני העמודים ב-375, 768 ו-1440 פיקסלים | נטענו; צילומי מסך נבדקו |
-| גלילה אופקית (`scrollWidth > innerWidth`) | אין, בכל הרחבים ובשני העמודים |
-| ניווט index → page2 → index | עבד |
-| ניווט מקלדת (Tab) | קישור "דילוג לתוכן" ואז המותג — עם מסגרת פוקוס |
-| שגיאות קונסול / בקשות שנכשלו | 0 / 0 |
-| בלי JavaScript | לאתר אין JavaScript, כך שהתוכן והניווט לא תלויים בו |
+| Check | Method | Result |
+|---|---|---|
+| Source file identity | Visual inspection of both current images | `page-01` = services flyer, `page-02` = B•Friendly flyer |
+| Content mapping | Script: every line of each transcription must appear in its mapped page | `index.html` ← page-01: 11/11 lines present. `page2.html` ← page-02: 21/21 lines present |
+| Wrong-page content | Same script: lines from one transcription found on the other page | None |
+| Inline CSS/JS | Search for `style=`, `<style>`, `<script>`, inline event handlers | None found; no JavaScript files exist |
+| Base-path safety | Search for `src="/` and `href="/` | None found; all paths are relative (`./`) |
+| Footer credit | Exact string `Built and developed by Oren Salami` | Present once on each page |
+| HTTP under `/nitzan-ashdod/` | Local `python -m http.server`, site copied into a `nitzan-ashdod/` subfolder; `curl` | `index.html`, `page2.html`, `assets/css/styles.css`: all 200 |
+| Layout | Headless Chromium (Playwright), both pages at 375, 768 and 1440 px, full-page screenshots reviewed | No horizontal overflow at any width; layout renders as intended |
+| Navigation | Click index → page2 → index via the header nav | Worked in both directions; `aria-current` on the correct item |
+| Keyboard | Tab from page load | Focus goes to the skip link, then the brand link, with a visible focus ring |
+| Console / network | Browser report | 0 console errors or warnings, 0 failed requests |
 
-תיקונים שבוצעו בעקבות הבדיקה: חור ריק ברשת הפתקים בדסקטופ (עמוד 2), ומפריד "|" שנשאר תלוי בשורת יצירת הקשר במובייל (עמוד 1).
+### Live-site checks
 
-## מגבלות
+Not performed. GitHub Pages is not yet enabled for the repository (`GET /repos/Oren1984/nitzan-ashdod/pages` returns 404), so no deployment exists to check.
 
-- הלוגואים (ניצן, B•Friendly) מופיעים בפלאיירים רק כחלק מצילום של דף מודפס, באיכות שאינה מתאימה לאתר. לכן המותג מוצג כטקסט ולא כתמונה. אם יתקבל קובץ לוגו מקורי — ניתן להוסיף ל-`public/assets/images/`.
-- צילום הילדים בעמוד 1 והאיור בתחתית עמוד 2 לא הועתקו (צילומי אווירה/איור, לא תוכן).
-- סמל הפייסבוק בעמוד 1 מופיע בלי כתובת עמוד, ולכן לא נוסף קישור לפייסבוק.
-- הגופן בכתב יד של עמוד 2 לא שוחזר; נעשה שימוש בגופני מערכת שתומכים בעברית.
-- לא בוצעה בדיקה עם קורא מסך או בדפדפנים נוספים (Safari, Firefox).
+## Round 1 – 2026-10-28 (initial build, previous page order)
+
+Performed on the first version, in which the B•Friendly flyer was the home page. Superseded by Round 2 where the two overlap.
+
+- Visual transcription of both flyers, including zoomed crops of small text regions.
+- Script check that all transcription lines appeared in the HTML: passed.
+- Static checks for inline CSS/JS and root-absolute paths: none found.
+- Headless Chromium at 375, 768 and 1440 px: no overflow, navigation worked, 0 console errors. Two layout fixes were made as a result (an empty grid cell on desktop for the notes page, and a dangling "|" separator in the mobile contact line).
+- First deployment run (`40701800624`) failed at "Configure Pages" because Pages was not enabled. No live checks were possible.
+
+## Known limitations
+
+- The logos (Nitzan, B•Friendly) exist only inside photographs of the printed flyers, at a quality unsuitable for the web, so the brand is rendered as text. An original logo file can be added under `public/assets/images/`.
+- The children's photo on the B•Friendly flyer and the illustration at the bottom of the services flyer were not reproduced (decorative imagery, not content).
+- The Facebook icon on the B•Friendly flyer has no page address, so no Facebook link was added.
+- The handwritten-style font of the services flyer was not reproduced; system fonts with Hebrew support are used.
+- Not tested with a screen reader, or in Safari or Firefox.
+- "Works without JavaScript" holds by construction (the site has no JavaScript); it was not tested separately with JavaScript disabled.

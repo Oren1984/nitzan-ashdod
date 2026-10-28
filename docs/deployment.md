@@ -1,24 +1,33 @@
-# פריסה (GitHub Pages)
+# Deployment (GitHub Pages)
 
-## תצורה
+## Configuration
 
-- מאגר: `Oren1984/nitzan-ashdod`, ענף `main`.
+- Repository: `Oren1984/nitzan-ashdod`, branch `main`.
 - Settings > Pages > Build and deployment > Source: **GitHub Actions**.
 - Workflow: `.github/workflows/deploy-pages.yml`.
-  - רץ על כל `push` ל-`main`, וגם ידנית (`workflow_dispatch`).
-  - מעלה **רק** את התיקייה `public/` (`actions/upload-pages-artifact`, `path: public`).
-  - פורס עם `actions/deploy-pages` לסביבה `github-pages`.
-  - הרשאות מינימליות: `contents: read`, `pages: write`, `id-token: write`.
-  - `concurrency: pages` — פריסה אחת בכל פעם, בלי לבטל פריסה שכבר רצה.
-- `public/.nojekyll` — מונע עיבוד Jekyll.
-- כתובת: https://oren1984.github.io/nitzan-ashdod/
+  - Runs on every `push` to `main`, and manually (`workflow_dispatch`).
+  - Uploads **only** the `public/` folder (`actions/upload-pages-artifact`, `path: public`).
+  - Deploys with `actions/deploy-pages` to the `github-pages` environment.
+  - Minimal permissions: `contents: read`, `pages: write`, `id-token: write`.
+  - `concurrency: pages` – one deployment at a time, without cancelling one already in progress.
+- `public/.nojekyll` – disables Jekyll processing.
+- Expected URL: https://oren1984.github.io/nitzan-ashdod/
 
-## הרשאות נדרשות
+## Current status
 
-- הרשאת כתיבה (push) למאגר כדי לפרסם עדכונים.
-- הרשאת Admin רק להגדרת Pages בפעם הראשונה (Source = GitHub Actions).
+GitHub Pages is **not yet enabled** for the repository, so the workflow fails at the "Configure Pages" step. One-time fix (requires admin access), either:
 
-## פרסום עדכון
+- Settings > Pages > Build and deployment > Source: **GitHub Actions**, or
+- `gh api -X POST repos/Oren1984/nitzan-ashdod/pages -f build_type=workflow`
+
+Then re-run the latest workflow: `gh workflow run deploy-pages.yml`.
+
+## Required permissions
+
+- Write (push) access to the repository to publish updates.
+- Admin access only for the one-time Pages setup (Source = GitHub Actions).
+
+## Publishing an update
 
 ```powershell
 git add public docs
@@ -26,25 +35,25 @@ git commit -m "Update page content"
 git push
 ```
 
-הפריסה מתחילה אוטומטית. מעקב:
+Deployment starts automatically. To follow it:
 
 ```powershell
 gh run list --workflow deploy-pages.yml --limit 3
 gh run watch
 ```
 
-## בדיקת כשל בפריסה
+## Investigating a failed deployment
 
-1. GitHub > Actions > "Deploy to GitHub Pages" > הריצה שנכשלה > לפתוח את השלב האדום.
-2. משורת הפקודה: `gh run view --log-failed`.
-3. בעיות נפוצות:
-   - Pages לא מוגדר ל-GitHub Actions → Settings > Pages > Source: GitHub Actions.
-   - חוקי הגנה של הסביבה `github-pages` לא מאפשרים את הענף → Settings > Environments > github-pages.
-4. הרצה חוזרת: `gh run rerun <run-id>` או `gh workflow run deploy-pages.yml`.
+1. GitHub > Actions > "Deploy to GitHub Pages" > the failed run > open the red step.
+2. From the command line: `gh run view --log-failed`.
+3. Common causes:
+   - Pages is not set to GitHub Actions → Settings > Pages > Source: GitHub Actions.
+   - Protection rules on the `github-pages` environment do not allow the branch → Settings > Environments > github-pages.
+4. To retry: `gh run rerun <run-id>` or `gh workflow run deploy-pages.yml`.
 
-## ביטול שינוי שגוי
+## Reverting a bad change
 
-לא לשכתב היסטוריה ולא להשתמש ב-force push. ליצור commit הפוך:
+Do not rewrite history or force-push. Create a reverting commit instead:
 
 ```powershell
 git log --oneline -5
@@ -52,4 +61,4 @@ git revert <commit-sha>
 git push
 ```
 
-ה-push מפעיל פריסה חדשה עם המצב הקודם.
+The push triggers a new deployment with the previous state.

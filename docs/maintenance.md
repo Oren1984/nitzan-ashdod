@@ -1,48 +1,50 @@
-# תחזוקת האתר
+# Site Maintenance
 
-## איפה עורכים כל עמוד
+## Where to edit each page
 
-| עמוד | קובץ | מקור התוכן |
+| Page | File | Content source |
 |---|---|---|
-| קבוצת B•Friendly (עמוד ראשי) | `public/index.html` | `docs/content/page-01-transcription.txt` |
-| שיעורים, אבחונים וטיפולים | `public/page2.html` | `docs/content/page-02-transcription.txt` |
+| 1 – Lessons, diagnoses and treatments (home page) | `public/index.html` | `docs/content/page-01-transcription.txt` |
+| 2 – B•Friendly social skills group | `public/page2.html` | `docs/content/page-02-transcription.txt` |
 
-עורכים את הטקסט ישירות בתוך ה-HTML. אין שלב בנייה (build) — מה שבתיקייה `public/` הוא מה שמתפרסם.
+Edit the text directly in the HTML. There is no build step: whatever is in `public/` is what gets published.
 
-## עיצוב משותף
+## Shared styling
 
-- כל העיצוב נמצא בקובץ אחד: `public/assets/css/styles.css`.
-- הצבעים מוגדרים כמשתנים בראש הקובץ (`:root`), למשל `--green-dark`, `--note-pink`.
-- עמוד 1 מקבל `class="theme-bfriendly"` על `<body>`, ועמוד 2 `class="theme-notes"`.
-- אין CSS בתוך ה-HTML (`style=` או `<style>`) — לשמור על זה.
-- לאתר אין JavaScript. אם יידרש בעתיד: קובץ חיצוני תחת `public/assets/js/` עם `defer`.
+- All styling lives in a single file: `public/assets/css/styles.css`.
+- Colors are defined as custom properties at the top of the file (`:root`), for example `--green-dark` and `--note-pink`.
+- Each page selects its visual theme with a class on `<body>`:
+  - `public/index.html`: `class="theme-notes"` (pastel note cards)
+  - `public/page2.html`: `class="theme-bfriendly"` (green B•Friendly theme)
+- Do not add CSS inside the HTML (`style=` attributes or `<style>` blocks).
+- The site has no JavaScript. If some is ever needed, add an external file under `public/assets/js/` and load it with `defer`.
 
-## הוספה או החלפה של תמונות
+## Adding or replacing images
 
-1. לשים את הקובץ ב-`public/assets/images/` (שם קובץ באנגלית, אותיות קטנות — GitHub Pages רגיש לאותיות).
-2. להפנות בנתיב יחסי: `<img src="./assets/images/logo.png" alt="תיאור בעברית" width="..." height="...">`.
-3. לא להשתמש בנתיב שמתחיל ב-`/` — הוא נשבר תחת `/nitzan-ashdod/`.
-4. התמונות המקוריות של הפלאיירים (`Image/`) הן חומר מקור בלבד ואינן נכנסות ל-Git.
+1. Put the file in `public/assets/images/`. Use lowercase English filenames, because GitHub Pages is case-sensitive.
+2. Reference it with a relative path: `<img src="./assets/images/logo.png" alt="Hebrew description" width="..." height="...">`.
+3. Never use a path that starts with `/`. It breaks under the `/nitzan-ashdod/` project path.
+4. The original flyer images (`Image/`) are source material only and are not tracked in Git.
 
-## RTL ומובייל
+## RTL and mobile layout
 
-- `<html lang="he" dir="rtl">` בשני העמודים — לא להסיר.
-- טקסט באנגלית, טלפון ומייל עטופים ב-`dir="ltr"` (ו-`lang="en"` לאנגלית) כדי שיוצגו נכון.
-- להעדיף מאפיינים לוגיים (`margin-inline`, `padding-inline-start`, `inset-inline-start`) על פני left/right.
-- נקודות שבירה: `700px` (טאבלט) ו-`1024px` (דסקטופ). העיצוב הבסיסי הוא למובייל.
-- אחרי שינוי: לבדוק ברוחב 375, 768 ו-1440 פיקסלים שאין גלילה אופקית.
+- Keep `<html lang="he" dir="rtl">` on both pages.
+- English text, phone numbers and email addresses are wrapped with `dir="ltr"` (and `lang="en"` for English) so they display correctly.
+- Prefer logical CSS properties (`margin-inline`, `padding-inline-start`, `inset-inline-start`) over left/right.
+- Breakpoints: `700px` (tablet) and `1024px` (desktop). The base styles target mobile.
+- After a change, check at 375, 768 and 1440 px wide that there is no horizontal scrolling.
 
-## עדכון הפוטר
+## Updating the footer
 
-הפוטר נמצא בסוף כל אחד משני קובצי ה-HTML (`<footer class="site-footer">`). יש לעדכן את שניהם. שורת הקרדיט חייבת להישאר בדיוק:
+The footer is at the end of each HTML file (`<footer class="site-footer">`). Update both files. The credit line must remain exactly:
 
 ```
 Built and developed by Oren Salami
 ```
 
-## השוואת תוכן מול המקור
+## Comparing content with the source
 
-1. לפתוח את קובץ התמלול ב-`docs/content/` ואת עמוד ה-HTML זה לצד זה.
-2. לוודא שכל שורה בתמלול מופיעה בעמוד, באותו נוסח ובאותו כתיב.
-3. הערות על טקסט לא ודאי נמצאות בסוף כל קובץ תמלול, תחת "הערות / אי-ודאות".
-4. אם התוכן במקור משתנה — לעדכן קודם את התמלול, ואז את ה-HTML.
+1. Open the transcription in `docs/content/` and the matching HTML page side by side.
+2. Confirm every line in the transcription appears on the page with the same wording and spelling.
+3. Notes about uncertain or non-transcribed elements are at the end of each transcription file, under "הערות / אי-ודאות".
+4. If the source content changes, update the transcription first, then the HTML.

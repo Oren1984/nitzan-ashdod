@@ -1,13 +1,13 @@
 /* ניצן אשדוד – עיצוב משותף לשני העמודים */
 
 :root {
-  /* צבעי עמוד 1 (B•Friendly) */
+  /* צבעי עמוד B•Friendly (page2.html) */
   --green-dark: #3d5a35;
   --green-darker: #2f4729;
   --green-light: #a8c27c;
   --green-pale: #e9eee2;
 
-  /* צבעי עמוד 2 (פתקים) */
+  /* צבעי עמוד הפתקים (index.html) */
   --note-pink: #f6dfe0;
   --note-yellow: #f8e7a6;
   --note-teal: #c3d6d5;
@@ -178,7 +178,7 @@ a {
   color: #ffffff;
 }
 
-/* ===== עמוד 1: B•Friendly ===== */
+/* ===== עמוד B•Friendly (page2.html) ===== */
 
 .hero {
   background: var(--green-dark);
@@ -351,7 +351,7 @@ a {
   }
 }
 
-/* ===== עמוד 2: פתקים ===== */
+/* ===== עמוד פתקים (index.html) ===== */
 
 .theme-notes {
   background: #fbfbfa;
