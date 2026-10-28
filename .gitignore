@@ -1,0 +1,31 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.swp
+*~
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Tooling caches and local test output
+node_modules/
+.cache/
+.vscode/
+.idea/
+test-output/
+screenshots/
+playwright-report/
+
+# Original reference flyers (source material only, not website assets)
+Image/
+prompt_*.md

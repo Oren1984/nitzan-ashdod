@@ -1,0 +1,546 @@
+/* ניצן אשדוד – עיצוב משותף לשני העמודים */
+
+:root {
+  /* צבעי עמוד 1 (B•Friendly) */
+  --green-dark: #3d5a35;
+  --green-darker: #2f4729;
+  --green-light: #a8c27c;
+  --green-pale: #e9eee2;
+
+  /* צבעי עמוד 2 (פתקים) */
+  --note-pink: #f6dfe0;
+  --note-yellow: #f8e7a6;
+  --note-teal: #c3d6d5;
+  --note-coral: #f5b9ac;
+  --note-blue: #c4def3;
+  --note-grey: #ebeceb;
+  --ink-blue: #1d5672;
+  --tape: rgba(240, 220, 140, 0.75);
+
+  --text: #1f2a1c;
+  --text-muted: #4a5546;
+  --surface: #ffffff;
+  --page-bg: #f6f7f4;
+  --focus: #c2410c;
+
+  --radius: 14px;
+  --font: "Segoe UI", "Noto Sans Hebrew", "Arial Hebrew", Arial, "Helvetica Neue", sans-serif;
+  --maxw: 1100px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--page-bg);
+  overflow-wrap: break-word;
+}
+
+h1,
+h2 {
+  line-height: 1.3;
+  margin: 0;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+.divider {
+  opacity: 0.7;
+  margin-inline: 0.4em;
+}
+
+/* דילוג לתוכן */
+.skip-link {
+  position: absolute;
+  inset-inline-start: 8px;
+  top: -100px;
+  z-index: 10;
+  padding: 0.5em 1em;
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 6px;
+}
+
+.skip-link:focus {
+  top: 8px;
+}
+
+/* כותרת וניווט */
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid #dfe3da;
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-block: 12px;
+}
+
+.brand {
+  display: inline-flex;
+  gap: 0.5em;
+  text-decoration: none;
+  color: var(--ink-blue);
+  font-weight: 700;
+  min-height: 44px;
+  align-items: center;
+}
+
+.brand-he {
+  font-size: 1.6rem;
+}
+
+.brand-en {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.06em;
+  border-bottom: 2px solid currentColor;
+  line-height: 1.2;
+}
+
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.35em 1em;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--green-darker);
+  background: var(--green-pale);
+}
+
+.site-nav a:hover {
+  background: #dce5d0;
+}
+
+.site-nav a[aria-current="page"] {
+  background: var(--green-dark);
+  color: #ffffff;
+}
+
+.theme-notes .site-nav a {
+  color: var(--ink-blue);
+  background: #e6f0f6;
+}
+
+.theme-notes .site-nav a:hover {
+  background: #d4e6f1;
+}
+
+.theme-notes .site-nav a[aria-current="page"] {
+  background: var(--ink-blue);
+  color: #ffffff;
+}
+
+/* ===== עמוד 1: B•Friendly ===== */
+
+.hero {
+  background: var(--green-dark);
+  color: #ffffff;
+  padding-block: 40px 48px;
+  text-align: center;
+}
+
+.hero-logos {
+  font-size: 1rem;
+  font-weight: 600;
+  opacity: 0.95;
+  margin-bottom: 1.25em;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  display: block;
+  font-size: clamp(1.6rem, 4.6vw, 2.6rem);
+  margin-top: 0.15em;
+}
+
+.hero-tagline {
+  display: inline-block;
+  margin: 1.25em 0 0;
+  padding: 0.3em 1em;
+  border-radius: 10px;
+  background: var(--green-light);
+  color: var(--green-darker);
+  font-size: clamp(1.25rem, 3.6vw, 1.9rem);
+  font-weight: 700;
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.25em 1.1em;
+  border-radius: 12px;
+  background: var(--green-light);
+  color: var(--green-darker);
+  font-size: 1.45rem;
+  font-weight: 800;
+  margin-bottom: 1em;
+}
+
+.pill-center {
+  display: table;
+  margin-inline: auto;
+}
+
+.intro-grid {
+  display: grid;
+  gap: 24px;
+  padding-block: 40px;
+}
+
+.panel-questions {
+  background: #e4e6e1;
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.panel-questions p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1.1em;
+}
+
+.panel-questions p:last-child {
+  margin-bottom: 0;
+}
+
+.intro-text {
+  align-self: center;
+}
+
+.intro-text p:last-child {
+  margin-bottom: 0;
+}
+
+.goals {
+  padding-block: 32px;
+  border-top: 2px solid #c9cec3;
+}
+
+.goals-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px 32px;
+}
+
+.goals-list li {
+  position: relative;
+  padding-inline-start: 2em;
+  font-weight: 600;
+}
+
+.goals-list li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.35em;
+  width: 1.1em;
+  height: 1.1em;
+  border-radius: 5px;
+  background: var(--green-light);
+}
+
+.details {
+  padding-block: 32px 40px;
+  border-top: 2px solid #c9cec3;
+}
+
+.details-list {
+  margin: 0;
+  padding-inline-start: 1.3em;
+}
+
+.details-list li {
+  margin-bottom: 0.4em;
+}
+
+.contact-band {
+  background: var(--green-dark);
+  color: #ffffff;
+  padding-block: 32px;
+  text-align: center;
+}
+
+.contact-band h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.6em;
+}
+
+.contact-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.contact-band a {
+  display: inline-block;
+  padding-block: 8px;
+  color: #ffffff;
+  text-underline-offset: 4px;
+}
+
+.contact-band :focus-visible {
+  outline-color: #ffd27a;
+}
+
+@media (max-width: 599px) {
+  .contact-line {
+    flex-direction: column;
+  }
+
+  .contact-line .divider {
+    display: none;
+  }
+}
+
+/* ===== עמוד 2: פתקים ===== */
+
+.theme-notes {
+  background: #fbfbfa;
+  color: var(--ink-blue);
+}
+
+.theme-notes main {
+  padding-block: 32px 48px;
+}
+
+.org-intro {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.org-name {
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  font-weight: 800;
+}
+
+.org-name span {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+}
+
+.org-tagline {
+  font-size: 1.15rem;
+  color: #2c5568;
+  margin: 0.5em 0 0;
+}
+
+.notes-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding: 32px 24px 24px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(30, 50, 60, 0.12);
+  text-align: center;
+}
+
+/* פס "סלוטייפ" דקורטיבי */
+.note::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  inset-inline-start: 50%;
+  width: 72px;
+  height: 22px;
+  transform: translateX(50%) rotate(-3deg);
+  background: var(--tape);
+  border-radius: 2px;
+}
+
+.note:nth-child(even)::before {
+  background: rgba(170, 205, 230, 0.8);
+  transform: translateX(50%) rotate(4deg);
+}
+
+.note h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.note p {
+  font-size: 1.2rem;
+  margin: 0.4em 0 0;
+}
+
+.note ul {
+  list-style: none;
+  margin: 0.6em 0 0;
+  padding: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.note ul li {
+  margin-bottom: 0.25em;
+}
+
+.note .note-remark {
+  margin-top: 1em;
+  font-size: 1.05rem;
+}
+
+.note a {
+  text-underline-offset: 5px;
+}
+
+.note-pink { background: var(--note-pink); }
+.note-yellow { background: var(--note-yellow); }
+.note-teal { background: var(--note-teal); }
+.note-coral { background: var(--note-coral); }
+.note-blue { background: var(--note-blue); }
+.note-grey { background: var(--note-grey); }
+
+.note-contact h2 {
+  font-size: 1.8rem;
+}
+
+.contact-phone {
+  font-weight: 700;
+}
+
+.contact-phone a {
+  display: inline-block;
+  padding-block: 6px;
+  font-size: 1.5rem;
+}
+
+/* ===== תחתית ===== */
+
+.site-footer {
+  background: var(--surface);
+  border-top: 1px solid #dfe3da;
+  padding-block: 20px;
+  text-align: center;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+  color: var(--green-darker);
+}
+
+.theme-notes .footer-nav-link {
+  color: var(--ink-blue);
+}
+
+.credit {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* ===== טאבלט ומעלה ===== */
+
+@media (min-width: 700px) {
+  .intro-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .goals-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .notes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .note-wide {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .goals-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .notes-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .note:nth-child(3n + 1) { transform: rotate(-0.6deg); }
+  .note:nth-child(3n + 2) { transform: rotate(0.5deg); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .site-nav a {
+    transition: background-color 0.15s ease;
+  }
+}
